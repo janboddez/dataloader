@@ -16,18 +16,23 @@ class DataLoader {
 			return;
 		}
 
-		$file     = $atts['file'];
-		$template = $atts['tpl'];
+		// Strip path info off provided file names.
+		$file     = basename( $atts['file'] );
+		$template = basename( $atts['tpl'] );
 
 		// YAML oughta be in `wp-content/uploads/yaml` and templates in `wp-content/uploads/yaml/templates`.
 		// It's up to you to create/protect these folders if needed.
 
 		$upload_dir = wp_upload_dir();
 		$dir        = trailingslashit( trailingslashit( $upload_dir['basedir'] ) . 'yaml' );
+		$tpl_dir    = trailingslashit( $dir . 'templates' );
 
-		$template_path = trailingslashit( $dir . 'templates' );
+		if ( 0 !== strcmp( realpath( $tpl_dir ), dirname( realpath( $tpl_dir . $template ) ) ) ) {
+			// A rather unexpected template location. This should never happen.
+			return;
+		}
 
-		if ( ! is_file( $template_path . $template ) ) {
+		if ( ! is_file( $dir . $file ) || ! is_file( $tpl_dir . $template ) ) {
 			return;
 		}
 
@@ -39,7 +44,7 @@ class DataLoader {
 		}
 
 		ob_start();
-		require $template_path . $template;
+		require $tpl_dir . $template;
 
 		return ob_get_clean();
 	}
