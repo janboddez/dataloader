@@ -25,7 +25,13 @@ class DataLoader {
 
 		$upload_dir = wp_upload_dir();
 		$dir        = trailingslashit( trailingslashit( $upload_dir['basedir'] ) . 'yaml' );
-		$tpl_dir    = trailingslashit( $dir . 'templates' );
+
+		if ( 0 !== strcmp( realpath( $dir ), dirname( realpath( $dir . $file ) ) ) ) {
+			// A rather unexpected data location. This should never happen.
+			return;
+		}
+
+		$tpl_dir = trailingslashit( $dir . 'templates' );
 
 		if ( 0 !== strcmp( realpath( $tpl_dir ), dirname( realpath( $tpl_dir . $template ) ) ) ) {
 			// A rather unexpected template location. This should never happen.
