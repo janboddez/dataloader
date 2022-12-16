@@ -1,5 +1,5 @@
 # DataLoader
-Output YAML data anywhere in WordPress.
+Output YAML data anywhere in WordPress. This plugin is _very_ proof-of-concept and should probably not be run in production.
 
 Download and install (use the ZIP file for now). Then move the `yaml` folder to `wp-content/uploads`, and add the following shortcode to any post or page:
 ```
