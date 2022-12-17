@@ -11,6 +11,6 @@ if ( empty( $data ) || ! is_array( $data ) ) {
 ?>
 <ul>
 	<?php foreach ( $data as $item ) : ?>
-		<li><a target="blank" href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['name'] ); ?></a> (<a href="<?php echo esc_url( $item['rss'] ); ?>">RSS feed</a>)</li>
+		<li><a target="_blank" href="<?php echo esc_url( $item['link'] ); ?>"><?php echo esc_html( $item['name'] ); ?></a> (<a href="<?php echo esc_url( $item['rss'] ); ?>">RSS feed</a>)</li>
 	<?php endforeach; ?>
 </ul>
