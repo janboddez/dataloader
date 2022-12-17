@@ -43,8 +43,7 @@ class DataLoader {
 		}
 
 		try {
-			$file = $dir . $file;
-			$data = Yaml::parseFile( $file );
+			$data = Yaml::parseFile( $dir . $file );
 		} catch ( \Exception $e ) {
 			// Oops. Allow template to handle this (or empty data).
 		}
